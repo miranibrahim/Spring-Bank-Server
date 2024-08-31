@@ -12,4 +12,5 @@ public interface AccountService {
     AccountDto withdrawAccount(Long id, double amount);
     List<AccountDto> getAllAccounts();
     void deleteAccount(Long id);
+    public String getAccountHolderWithHighestBalance();
 }

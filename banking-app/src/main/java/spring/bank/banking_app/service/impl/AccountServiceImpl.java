@@ -82,4 +82,10 @@ public class AccountServiceImpl implements AccountService {
 
         accountRepository.deleteById(id);
     }
+
+    @Override
+    public String getAccountHolderWithHighestBalance() {
+        Account account = accountRepository.findTopByOrderByBalanceDesc();
+        return account.getAccountHolderName();
+    }
 }

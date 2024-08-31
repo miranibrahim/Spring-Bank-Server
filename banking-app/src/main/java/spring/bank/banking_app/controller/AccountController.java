@@ -60,4 +60,9 @@ public class AccountController {
         accountService.deleteAccount(id);
         return ResponseEntity.ok("Account deleted successfully");
     }
+    @GetMapping("/highest-balance")
+    public ResponseEntity<String> getAccountHolderWithHighestBalance() {
+        String accountHolderName = accountService.getAccountHolderWithHighestBalance();
+        return ResponseEntity.ok(accountHolderName);
+    }
 }
