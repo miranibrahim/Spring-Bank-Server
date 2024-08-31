@@ -8,6 +8,9 @@ import spring.bank.banking_app.mapper.AccountMapper;
 import spring.bank.banking_app.repository.AccountRepository;
 import spring.bank.banking_app.service.AccountService;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class AccountServiceImpl implements AccountService {
 
@@ -63,5 +66,20 @@ public class AccountServiceImpl implements AccountService {
         return AccountMapper.mapToAccountDto(savedAccount);
     }
 
+    @Override
+    public List<AccountDto> getAllAccounts() {
+        List<Account> accounts = accountRepository.findAll();
+        return accounts.stream()
+                .map((account) -> AccountMapper.mapToAccountDto(account))
+                .collect(Collectors.toList());
+    }
 
+    @Override
+    public void deleteAccount(Long id) {
+        Account account = accountRepository
+                .findById(id).
+                orElseThrow(()-> new RuntimeException("Account not exists."));
+
+        accountRepository.deleteById(id);
+    }
 }
